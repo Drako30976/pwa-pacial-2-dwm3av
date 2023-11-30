@@ -1,48 +1,60 @@
 let urlCharters = 'https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=501d252bce4154b391c3e255c2876993&hash=44e3d767c9be976309eb21e2fa27764a&limit=50';
-let urlChar = 'https://gateway.marvel.com:443/v1/public/characters/1017100?ts=1&apikey=501d252bce4154b391c3e255c2876993&hash=44e3d767c9be976309eb21e2fa27764a'
+let urlChar = 'https://gateway.marvel.com:443/v1/public/characters/'
 
 async function obtenerResultado() {
     try {
-      const respuesta = await fetch(urlCharters);
-      const datos = await respuesta.json();
-      const heroes = datos.data.results;
-      mostrarHeroes(heroes);
+        const respuesta = await fetch(urlCharters);
+        const datos = await respuesta.json();
+        const heroes = datos.data.results;
+        mostrarHeroes(heroes);
     } catch (error) {
-      console.error("Error:", error);
+        console.error("Error:", error);
     }
-  }
+}
 
-  function mostrarHeroes(heroes) {
+function mostrarHeroes(heroes) {
     const container = document.getElementById('contenedor');
 
     heroes.forEach(hero => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.addEventListener('click', () => mostrarModal(hero));
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.addEventListener('click', () => mostrarModal(hero));
 
-      const nombre = document.createElement('h2');
-      nombre.textContent = hero.name;
+        const nombre = document.createElement('h2');
+        nombre.textContent = hero.name;
 
-      const imagen = document.createElement('img');
-      imagen.src = `${hero.thumbnail.path}.${hero.thumbnail.extension}`;
-      imagen.alt = hero.name;
+        const imagen = document.createElement('img');
+        imagen.src = `${hero.thumbnail.path}.${hero.thumbnail.extension}`;
+        imagen.alt = hero.name;
 
-      const button = document.createElement('button');
-      button.addEventListener('click', () => mostrarModal(hero));
-      button.className='btn-open-modal';
-      button.textContent = 'Ver Detalles';
-      button.addEventListener('click', () => mostrarModal(hero));
+        const button = document.createElement('button');
+        button.addEventListener('click', () => obtenerDetalleHeroe(hero.id));
+        button.className = 'btn-open-modal';
+        button.textContent = 'Ver Detalles';
 
+        card.dataset.heroId = hero.id;
 
-
-      card.appendChild(nombre);
-      card.appendChild(imagen);
-      card.appendChild(button);
-      container.appendChild(card);
+        card.appendChild(nombre);
+        card.appendChild(imagen);
+        card.appendChild(button);
+        container.appendChild(card);
     });
-  }
+}
 
-  function mostrarModal(hero) {
+async function obtenerDetalleHeroe(heroId) {
+    const url = `${urlChar}${heroId}?ts=1&apikey=501d252bce4154b391c3e255c2876993&hash=44e3d767c9be976309eb21e2fa27764a`;
+
+    try {
+        const respuesta = await fetch(url);
+        const datos = await respuesta.json();
+        const hero = datos.data.results[0];
+        mostrarModal(hero);
+    } catch (error) {
+        console.error("Error obteniendo detalles del héroe:", error);
+    }
+}
+
+function mostrarModal(hero) {
     const modal = document.getElementById('modal');
     const modalContent = document.getElementById('modal-content');
 
@@ -58,8 +70,8 @@ async function obtenerResultado() {
     modal.style.display = 'flex';
 
     modal.addEventListener('click', () => {
-      modal.style.display = 'none';
+        modal.style.display = 'none';
     });
-  }
+}
 
-  obtenerResultado();
+obtenerResultado();
