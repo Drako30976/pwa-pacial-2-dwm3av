@@ -59,3 +59,14 @@ h1{
     border-radius: 8px;
     text-align: left;
   }
+  #cerrar-modal {
+    padding: 10px 15px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#cerrar-modal:hover {
+    background-color: #555;
+}

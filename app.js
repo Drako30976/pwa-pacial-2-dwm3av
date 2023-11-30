@@ -65,13 +65,20 @@ function mostrarModal(hero) {
       <ul>
         ${hero.comics.items.map(comic => `<li>${comic.name}</li>`).join('')}
       </ul>
+      <button id="cerrar-modal">Cerrar</button>
     `;
 
     modal.style.display = 'flex';
+
+    const cerrarModalButton = document.getElementById('cerrar-modal');
+    cerrarModalButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 
     modal.addEventListener('click', () => {
         modal.style.display = 'none';
     });
 }
+
 
 obtenerResultado();
