@@ -5,10 +5,14 @@ body{
     background-attachment: fixed;
 }
 h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: auto;
-    padding: 20px;
+    padding: 30px;
     text-align: center;
     font-size: 5em;
+}
+h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 #contenedor{
     display: grid;
@@ -53,11 +57,21 @@ h1{
   }
 
   #modal-content {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     width: 90%;
-    background-color: #fff;
+    background:url(img/fondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     padding: 16px;
     border-radius: 8px;
     text-align: left;
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+    font-weight: bolder;
+  }
+  ul{
+    list-style: none;
   }
   #cerrar-modal {
     padding: 10px 15px;
@@ -69,4 +83,8 @@ h1{
 
 #cerrar-modal:hover {
     background-color: #555;
+}
+.logo{
+    margin: auto;
+    text-align: center;
 }
