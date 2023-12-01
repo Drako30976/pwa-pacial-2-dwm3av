@@ -3,7 +3,7 @@ let urlChar = 'https://gateway.marvel.com:443/v1/public/characters/'
 
 let heroArray=[]
 
-const cacheName = 'heroesCache';
+const cacheName = 'hero-cache';
 
 async function obtenerResultado() {
     try {
@@ -14,7 +14,15 @@ async function obtenerResultado() {
             const { id, name, thumbnail } = char;
             heroArray.push({ id, name, thumbnail });
         }
+
+        const cache = await caches.open('hero-cache');
+        const existCache = await cache.match('hero-colection');
+
+        if (!existCache) {
+            await cache.put('hero-colection', new Response(JSON.stringify(heroArray)));
+        }
         mostrarHeroes();
+
     } catch (error) {
         console.error("Error:", error);
     }
