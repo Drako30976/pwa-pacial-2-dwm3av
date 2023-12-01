@@ -20,7 +20,6 @@ function mostrarHeroes(heroes) {
     heroes.forEach(hero => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.addEventListener('click', () => mostrarModal(hero));
 
         const nombre = document.createElement('h2');
         nombre.textContent = hero.name;
@@ -36,7 +35,6 @@ function mostrarHeroes(heroes) {
 
         const fav = document.createElement('button');
         fav.addEventListener('click', (e) => {
-            e.stopPropagation()
             agregarAFavoritos(hero);
         });
         fav.className = 'fav';
@@ -54,6 +52,9 @@ function mostrarHeroes(heroes) {
 
 async function obtenerDetalleHeroe(heroId) {
     const url = `${urlChar}${heroId}?ts=1&apikey=501d252bce4154b391c3e255c2876993&hash=44e3d767c9be976309eb21e2fa27764a`;
+
+    console.log(heroId)
+    console.log(urlChar)
 
     try {
         const respuesta = await fetch(url);
