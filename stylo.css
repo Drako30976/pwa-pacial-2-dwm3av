@@ -88,3 +88,13 @@ h2{
     margin: auto;
     text-align: center;
 }
+.fav {
+  margin: 8px;
+  cursor: pointer;
+  background-color: rgb(0, 47, 255);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 1.2em;
+}
