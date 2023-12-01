@@ -1,13 +1,20 @@
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then((registration) => {
+        console.log("service worker registrado");
+      })
+      .catch((error) => {
+        console.log("service worker no registrado");
+      });
+  }
+
 let urlCharters = 'https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=501d252bce4154b391c3e255c2876993&hash=44e3d767c9be976309eb21e2fa27764a&limit=50';
 let urlChar = 'https://gateway.marvel.com:443/v1/public/characters/'
 
 let heroArray=[]
 
 const cacheName = 'hero-cache';
-
-caches.keys().then(keys=>{
-    console.log(keys)
-})
 
 async function obtenerResultado() {
     try {
@@ -18,13 +25,6 @@ async function obtenerResultado() {
             const { id, name, thumbnail } = char;
             heroArray.push({ id, name, thumbnail });
         }
-
-        caches.open(cacheName).then(cache => {
-            const jsonStr = JSON.stringify(heroArray);
-            const cacheRequest = new Request('http://127.0.0.1:5500/hero-colection');
-            const cacheResponse = new Response(jsonStr);
-            cache.put(cacheRequest, cacheResponse)
-          });
         mostrarHeroes();
 
     } catch (error) {
