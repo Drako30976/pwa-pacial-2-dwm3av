@@ -5,6 +5,10 @@ let heroArray=[]
 
 const cacheName = 'hero-cache';
 
+caches.keys().then(keys=>{
+    console.log(keys)
+})
+
 async function obtenerResultado() {
     try {
         const respuesta = await fetch(urlCharters);
@@ -15,12 +19,12 @@ async function obtenerResultado() {
             heroArray.push({ id, name, thumbnail });
         }
 
-        const cache = await caches.open('hero-cache');
-        const existCache = await cache.match('hero-colection');
-
-        if (!existCache) {
-            await cache.put('hero-colection', new Response(JSON.stringify(heroArray)));
-        }
+        caches.open(cacheName).then(cache => {
+            const jsonStr = JSON.stringify(heroArray);
+            const cacheRequest = new Request('http://127.0.0.1:5500/hero-colection');
+            const cacheResponse = new Response(jsonStr);
+            cache.put(cacheRequest, cacheResponse)
+          });
         mostrarHeroes();
 
     } catch (error) {
