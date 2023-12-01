@@ -98,3 +98,18 @@ h2{
   padding: 8px 16px;
   font-size: 1.2em;
 }
+.nav{
+  display: flex ;
+  align-items: center;
+  justify-content: space-around;
+}
+.nav a{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+  font-size: 3em;
+  text-decoration: none;
+  color: #e20c0c;
+  text-shadow: 2px 2px 3px #333;
+}
