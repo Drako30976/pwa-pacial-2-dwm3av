@@ -9,7 +9,7 @@ if ("serviceWorker" in navigator) {
       });
   }
 
-let urlCharters = 'https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=501d252bce4154b391c3e255c2876993&hash=44e3d767c9be976309eb21e2fa27764a&limit=50';
+let urlCharters = 'https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=501d252bce4154b391c3e255c2876993&hash=44e3d767c9be976309eb21e2fa27764a&limit=20';
 let urlChar = 'https://gateway.marvel.com:443/v1/public/characters/'
 
 let heroArray=[]
