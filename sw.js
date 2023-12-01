@@ -9,6 +9,6 @@ if("serviceWorker" in navigator) {
 }
 
 
-self.addEventListener('fetch', (e)=>{
-    console.log(e)
+self.addEventListener("fetch", (e)=>{
+    console.log("pedido de url", e.request.url)
 })

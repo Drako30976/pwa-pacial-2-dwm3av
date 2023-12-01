@@ -1,6 +1,8 @@
 let urlCharters = 'https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=501d252bce4154b391c3e255c2876993&hash=44e3d767c9be976309eb21e2fa27764a&limit=50';
 let urlChar = 'https://gateway.marvel.com:443/v1/public/characters/'
 
+let heroArray=[]
+
 const cacheName = 'heroesCache';
 
 async function obtenerResultado() {
@@ -8,16 +10,20 @@ async function obtenerResultado() {
         const respuesta = await fetch(urlCharters);
         const datos = await respuesta.json();
         const heroes = datos.data.results;
-        mostrarHeroes(heroes);
+        for (const char of heroes) {
+            const { id, name, thumbnail } = char;
+            heroArray.push({ id, name, thumbnail });
+        }
+        mostrarHeroes();
     } catch (error) {
         console.error("Error:", error);
     }
 }
 
-function mostrarHeroes(heroes) {
+function mostrarHeroes() {
     const container = document.getElementById('contenedor');
 
-    heroes.forEach(hero => {
+    heroArray.forEach(hero => {
         const card = document.createElement('div');
         card.className = 'card';
 
@@ -52,9 +58,6 @@ function mostrarHeroes(heroes) {
 
 async function obtenerDetalleHeroe(heroId) {
     const url = `${urlChar}${heroId}?ts=1&apikey=501d252bce4154b391c3e255c2876993&hash=44e3d767c9be976309eb21e2fa27764a`;
-
-    console.log(heroId)
-    console.log(urlChar)
 
     try {
         const respuesta = await fetch(url);
