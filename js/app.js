@@ -130,6 +130,8 @@ function getCachedHeroes() {
 function saveToCache(data) {
     localStorage.setItem(cacheName, JSON.stringify(data));
 }
+
+
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (event) => {
@@ -150,6 +152,10 @@ function showInstallButton() {
       }
       deferredPrompt = null;
     });
+  });
+  window.addEventListener('appinstalled', (event) => {
+    installButton.style.display = 'none';
+    console.log('La PWA se ha instalado con éxito');
   });
 }
 

@@ -104,7 +104,10 @@ function showInstallButton() {
       deferredPrompt = null;
     });
   });
+  window.addEventListener('appinstalled', (event) => {
+    installButton.style.display = 'none';
+    console.log('La PWA se ha instalado con éxito');
+  });
 }
-
 
 obtenerResultado();

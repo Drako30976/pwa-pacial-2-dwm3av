@@ -3,8 +3,6 @@ self.addEventListener("install", (e) => {
     cache.addAll([
       './',
       './js/app.js',
-      './stylo.css',
-      './index.html'
     ]);
   });
   e.waitUntil(cache);
