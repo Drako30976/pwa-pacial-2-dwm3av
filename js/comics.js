@@ -83,6 +83,28 @@ function getCachedHeroes() {
 function saveToCache(data) {
     localStorage.setItem(cacheName, JSON.stringify(data));
 }
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredPrompt = event;
+  showInstallButton();
+});
+
+function showInstallButton() {
+  const installButton = document.getElementById('instalar')
+  installButton.addEventListener('click', () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('Usuario aceptó la instalación');
+      } else {
+        console.log('Usuario rechazó la instalación');
+      }
+      deferredPrompt = null;
+    });
+  });
+}
 
 
 obtenerResultado();
